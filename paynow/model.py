@@ -419,8 +419,6 @@ class Paynow:
 
         """
         body = {
-            "resulturl": self.result_url,
-            "returnurl": self.return_url,
             "reference": payment.reference,
             "amount": payment.total(),
             "id": self.integration_id,
@@ -432,6 +430,8 @@ class Paynow:
         for key, value in body.items():
             body[key] = quote_plus(str(value))
 
+        body["resulturl"] = self.result_url
+        body["returnurl"] = self.return_url
         body['hash'] = self.__hash(body, self.integration_key)
 
         return body
@@ -450,8 +450,6 @@ class Paynow:
             dict: A dictionary properly formatted in the format required by Paynow
         """
         body = {
-            "resulturl": self.result_url,
-            "returnurl": self.return_url,
             "reference": payment.reference,
             "amount": payment.total(),
             "id": self.integration_id,
@@ -468,6 +466,8 @@ class Paynow:
 
             body[key] = quote_plus(str(value))  # Url encode the
 
+        body["resulturl"] = self.result_url
+        body["returnurl"] = self.return_url
         body['hash'] = self.__hash(body, self.integration_key)
 
         return body
